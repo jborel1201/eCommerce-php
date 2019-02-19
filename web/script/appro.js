@@ -8,7 +8,5 @@ $(document).ready(function () {
         window.location.assign("index.php?page=ajoutProduitAppro&produit=" + produit + "&quantite=" + qt);
 
 
-
-
     });
 });

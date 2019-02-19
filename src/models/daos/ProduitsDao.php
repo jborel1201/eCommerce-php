@@ -79,6 +79,24 @@ class ProduitsDao extends abstractDAO
 
     }
 
+    public static function produitsSelectOneById($cnx, $param)
+    {
+        $sql = "SELECT * FROM produits WHERE id_produit = ?";
+        $result = self::selectWithParameter($cnx, $sql, $param);
+
+        $produit= new ProduitsBD();
+        $produit
+            ->setIdProduit($result['id_produit'])
+            ->setDesignationProduit($result['designation_produit'])
+            ->setPrixProduit($result['prix_produit'])
+            ->setPhotoProduit($result['photo_produit'])
+            ->setQuantite($result['quantite'])
+            ->setIdCategorie($result['id_categorie']);
+
+
+        return $produit;
+
+    }
 
 
     public static  function produitsInsert($cnx,$produit){
@@ -89,7 +107,7 @@ class ProduitsDao extends abstractDAO
             $produit->getQuantite(),
             $produit->getIdCategorie(),
         );
-        $sql = "INSERT INTO produits (designation_produits,prix_produit,photo_produit,quantite,id_categorie) VALUES (?,?,?,?,?)";
+        $sql = "INSERT INTO produits (designation_produit,prix_produit,photo_produit,quantite,id_categorie) VALUES (?,?,?,?,?)";
         return self::CUD($cnx,$sql,$param);
     }
 

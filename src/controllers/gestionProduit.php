@@ -19,7 +19,11 @@ function generateMapCatégorie($categories)
 }
 
 $listeCategories = CategoriesDao::categoriesSelectAll($lcnx);
+
 $listeProduits = ProduitsDao::produitsSelectAll($lcnx);
 
-echo $viewContent = getRenderedView("gestionProduit",["produits"=>$listeProduits, "mapCategorie"=>generateMapCatégorie($listeCategories)]);
+echo $viewContent = getRenderedView("gestionProduit",[
+        "produits"=>$listeProduits,
+        "mapCategorie"=>generateMapCatégorie($listeCategories),
+        "categories" => $listeCategories]);
 
