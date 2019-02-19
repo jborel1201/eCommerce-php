@@ -33,7 +33,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="index.php?page=appro">Approvisionnement</a>
-                        <a class="dropdown-item" href="">Gestion produits</a>
+                        <a class="dropdown-item" href="index.php?page=gestionProduit">Gestion produits</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">

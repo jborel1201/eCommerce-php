@@ -17,6 +17,8 @@ class CategoriesDao extends abstractDAO
             $categorie
                 ->setIdCategorie($donnee['id_categorie'])
                 ->setLibelleCategorie($donnee['libelle_categorie']);
+
+            array_push($listeCategorie,$categorie);
         }
 
         return $listeCategorie;
