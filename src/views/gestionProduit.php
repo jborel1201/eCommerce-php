@@ -37,7 +37,8 @@ foreach ($produits as $produit) {
             
             
                     
-        <button type='submit' class='btn btn-danger' name='update' value='".$produit->getIdProduit()."'>Modifier</button>
+        <button type='submit' class='btn btn-success' name='update' value='".$produit->getIdProduit()."'>Modifier</button>
+        <button type='submit' class='btn btn-danger' name='delete' value='".$produit->getIdProduit()."'><i class='fa fa-trash'></i></button>
         </div >
     </form>";
 

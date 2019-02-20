@@ -7,7 +7,9 @@ include_once ENTITIES_PATH.'ProduitsBD.php';
 $lcnx= Connexion::getConnection();
 
 
-function setDataToProduct($arg,$produit){
+
+
+function setDataToObject($arg,$produit){
 
     $produit
         ->setDesignationProduit($arg['designation'])
@@ -24,7 +26,7 @@ function updateProduct($arg,$lcnx){
 
     $produit = ProduitsDao::produitsSelectOneById($lcnx,array($arg['id']));
 
-    setDataToProduct($arg,$produit);
+    setDataToObject($arg,$produit);
 
 
     ProduitsDao::produitsUpdate($lcnx,$produit);
@@ -36,16 +38,24 @@ function updateProduct($arg,$lcnx){
 function insertProduct($arg,$lcnx){
 
     $produit = new ProduitsBD();
-    setDataToProduct($arg,$produit);
+    setDataToObject($arg,$produit);
     $produit->setQuantite(0);
 
-    var_dump($produit);
     ProduitsDao::produitsInsert($lcnx,$produit);
 
 }
 
-$id = filter_input(INPUT_POST,'update', FILTER_SANITIZE_STRING);
+function deleteProduct($id,$lcnx){
 
+
+    $produit = ProduitsDao::produitsSelectOneById($lcnx,array($id));
+    ProduitsDao::produitsDelete($lcnx,$produit);
+
+
+}
+
+$id = filter_input(INPUT_POST,'update', FILTER_SANITIZE_STRING);
+$delete = filter_input(INPUT_POST,'delete', FILTER_SANITIZE_STRING);
 
 $arg = [
     'designation'=>filter_input(INPUT_POST,'designation',FILTER_SANITIZE_STRING),
@@ -56,7 +66,8 @@ $arg = [
 ];
 
 
-// Insert ou update
-$id ? updateProduct($arg,$lcnx) : insertProduct($arg,$lcnx);
+
+// Mise a jour de la bd
+$delete ? deleteProduct($delete,$lcnx) : ($id ? updateProduct($arg,$lcnx) : insertProduct($arg,$lcnx));
 
 include_once CTRL_PATH.'gestionProduit.php';
